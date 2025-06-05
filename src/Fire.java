@@ -70,7 +70,7 @@ public class Fire {
             newCol < forest[matchR].length && 
             forest[matchR][matchC] == 't')
             {
-                possibleList.add(new int[] {newRow, newCol});
+                possibleList.add(new int[]{newRow, newCol});
             }
         }
         return possibleList;
