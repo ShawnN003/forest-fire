@@ -57,9 +57,9 @@ public class Fire {
 
             if (visited[curR][curC]) continue;
 
-            burnTime = time;
-
             visited[curR][curC] = true;
+
+            burnTime = time;
 
             List<int[]> neighborTrees = possibleBurns(forest, curR, curC);
 
@@ -69,7 +69,7 @@ public class Fire {
                 for (int[] neighbor : neighborTrees) {
                     int neighR = neighbor[0];
                     int neighC = neighbor[1];
-                    queue.add(new int[]{neighR, neighC, time});
+                    if (!visited[neighR][neighC]) queue.add(new int[]{neighR, neighC, time});
                 }
             }
         }
@@ -101,8 +101,8 @@ public class Fire {
             if(newRow >= 0 && newRow < 
             forest.length && 
             newCol >= 0 && 
-            newCol < forest[matchR].length && 
-            forest[matchR][matchC] == 't')
+            newCol < forest[newRow].length && 
+            forest[newRow][newCol] == 't')
             {
                 possibleList.add(new int[]{newRow, newCol});
             }
