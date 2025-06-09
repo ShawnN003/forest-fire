@@ -45,6 +45,23 @@ public class FireTest {
     }
 
     @Test
+    public void testTimeAllTrees() {
+        char[][] forest = {
+            {'t','t','t','t','t'},
+            {'t','t','t','t','t'},
+            {'t','t','t','t','t'}
+        };
+
+        int matchR = 0;
+        int matchC = 0;
+
+        int expected = 6;
+        int actual = Fire.timeToBurn(forest, matchR, matchC);
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
     public void testTimeZero() {
         char[][] forest = {
             {'t','.','t','t','t'},
@@ -116,6 +133,44 @@ public class FireTest {
 
         List<int[]> possibleBurn = Fire.possibleBurns(forest, matchR, matchC);
         assertEquals(0,possibleBurn.size());
+    }
+
+    @Test
+    public void testGetTwoPossibleBurns() {
+        char[][] forest = {
+            {'.','.','.','.','.'},
+            {'.','.','t','t','t'},
+            {'.','.','.','.','.'}
+        };
+        int matchR = 1;
+        int matchC = 3;
+        List<int[]> possibleBurn = Fire.possibleBurns(forest, matchR, matchC);
+        Set<String> convertedSet = convertToSet(possibleBurn);
+        
+        assertEquals(2, convertedSet.size());
+        assertTrue(convertedSet.contains("1, 2"));
+        assertTrue(convertedSet.contains("1, 4"));
+        assertFalse(convertedSet.contains("0, 3"));
+        assertFalse(convertedSet.contains("2, 3"));
+    }
+
+    @Test
+    public void testGetThreePossibleBurns() {
+        char[][] forest = {
+            {'.','.','.','t','.'},
+            {'.','.','t','t','t'},
+            {'.','.','.','.','.'}
+        };
+        int matchR = 1;
+        int matchC = 3;
+        List<int[]> possibleBurn = Fire.possibleBurns(forest, matchR, matchC);
+        Set<String> convertedSet = convertToSet(possibleBurn);
+        
+        assertEquals(3, convertedSet.size());
+        assertTrue(convertedSet.contains("1, 2"));
+        assertTrue(convertedSet.contains("1, 4"));
+        assertTrue(convertedSet.contains("0, 3"));
+        assertFalse(convertedSet.contains("2, 3"));
     }
 
     // Set method to convert list to set to check what it contains
