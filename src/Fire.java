@@ -41,23 +41,38 @@ public class Fire {
      * @return the time at which the final tree to be incinerated starts burning
      */
     public static int timeToBurn(char[][] forest, int matchR, int matchC) {
-        boolean [][] visited = new boolean[forest.length][forest[0].length];
+        boolean[][] visited = new boolean[forest.length][forest[0].length];
         Queue<int[]> queue = new LinkedList<>();
-        int[] myNum = {matchR,matchC,0};
+        int burnTime = 0;
+        int[] myNum = {matchR,matchC,burnTime};
 
         queue.add(myNum);
 
-        myNum[2]++;
         while(!queue.isEmpty())
         {
-            queue.poll();
+            int[] treeBurn = queue.poll();
+            int curR = treeBurn[0];
+            int curC = treeBurn[1];
+            int time = treeBurn[2];
+
+            if (visited[curR][curC]) continue;
+
+            burnTime = time;
+
+            visited[curR][curC] = true;
+
+            List<int[]> neighborTrees = possibleBurns(forest, curR, curC, time);
+
+            if (neighborTrees != null) {
+                queue.addAll(neighborTrees);
+            }
         }
         // HINT: when adding to your BFS queue, you can include more information than
         // just a location. What other information might be useful?
-        return myNum[2];
+        return burnTime;
     }
 
-    public static List<int[]> possibleBurns(char[][] forest, int matchR, int matchC)
+    public static List<int[]> possibleBurns(char[][] forest, int matchR, int matchC, int time)
     {
         List<int[]> possibleList = new ArrayList<>();
 
@@ -71,6 +86,7 @@ public class Fire {
 
         int newRow = 0;
         int newCol = 0;
+        int newTime = time + 1;
 
         for(int[] possible : possibleBurn)
         {
@@ -83,7 +99,7 @@ public class Fire {
             newCol < forest[matchR].length && 
             forest[matchR][matchC] == 't')
             {
-                possibleList.add(new int[]{newRow, newCol});
+                possibleList.add(new int[]{newRow, newCol, newTime});
             }
         }
         return possibleList;

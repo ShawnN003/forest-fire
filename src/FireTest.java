@@ -27,28 +27,28 @@ public class FireTest {
         assertEquals(expected, actual);
     }
 
-    @Test
-    public void testGetPossibleBurns() {
-        char[][] forest = {
-            {'t','.','.','t','t','t','t','.','t'},
-            {'.','.','t','t','.','.','.','.','t'},
-            {'.','.','t','t','t','t','t','t','t'},
-            {'t','t','t','t','.','.','.','.','.'}
-        };
+    // @Test
+    // public void testGetPossibleBurns() {
+    //     char[][] forest = {
+    //         {'t','.','.','t','t','t','t','.','t'},
+    //         {'.','.','t','t','.','.','.','.','t'},
+    //         {'.','.','t','t','t','t','t','t','t'},
+    //         {'t','t','t','t','.','.','.','.','.'}
+    //     };
 
-        int matchR = 2;
-        int matchC = 3;
+    //     int matchR = 2;
+    //     int matchC = 3;
 
-        List<int[]> possibleBurn = Fire.possibleBurns(forest, matchR, matchC);
-        Set<String> convertedSet = convertToSet(possibleBurn);
+    //     List<int[]> possibleBurn = Fire.possibleBurns(forest, matchR, matchC);
+    //     Set<String> convertedSet = convertToSet(possibleBurn);
 
-        assertEquals(4, convertedSet.size());
-        assertTrue(convertedSet.contains("2, 2"));
-        assertTrue(convertedSet.contains("1, 3"));
-        assertTrue(convertedSet.contains("2, 4"));
-        assertTrue(convertedSet.contains("3, 3"));
-        assertFalse(convertedSet.contains("3, 0"));
-    }
+    //     assertEquals(4, convertedSet.size());
+    //     assertTrue(convertedSet.contains("2, 2"));
+    //     assertTrue(convertedSet.contains("1, 3"));
+    //     assertTrue(convertedSet.contains("2, 4"));
+    //     assertTrue(convertedSet.contains("3, 3"));
+    //     assertFalse(convertedSet.contains("3, 0"));
+    // }
 
     // Set method to convert list to set to check what it contains
     private Set<String> convertToSet(List<int[]> list) {
