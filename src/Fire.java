@@ -61,10 +61,16 @@ public class Fire {
 
             visited[curR][curC] = true;
 
-            List<int[]> neighborTrees = possibleBurns(forest, curR, curC, time);
+            List<int[]> neighborTrees = possibleBurns(forest, curR, curC);
+
+            time++;
 
             if (neighborTrees != null) {
-                queue.addAll(neighborTrees);
+                for (int[] neighbor : neighborTrees) {
+                    int neighR = neighbor[0];
+                    int neighC = neighbor[1];
+                    queue.add(new int[]{neighR, neighC, time});
+                }
             }
         }
         // HINT: when adding to your BFS queue, you can include more information than
@@ -72,7 +78,7 @@ public class Fire {
         return burnTime;
     }
 
-    public static List<int[]> possibleBurns(char[][] forest, int matchR, int matchC, int time)
+    public static List<int[]> possibleBurns(char[][] forest, int matchR, int matchC)
     {
         List<int[]> possibleList = new ArrayList<>();
 
@@ -86,7 +92,6 @@ public class Fire {
 
         int newRow = 0;
         int newCol = 0;
-        int newTime = time + 1;
 
         for(int[] possible : possibleBurn)
         {
@@ -99,7 +104,7 @@ public class Fire {
             newCol < forest[matchR].length && 
             forest[matchR][matchC] == 't')
             {
-                possibleList.add(new int[]{newRow, newCol, newTime});
+                possibleList.add(new int[]{newRow, newCol});
             }
         }
         return possibleList;
