@@ -1,5 +1,7 @@
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class Fire {
     /**
@@ -39,9 +41,20 @@ public class Fire {
      * @return the time at which the final tree to be incinerated starts burning
      */
     public static int timeToBurn(char[][] forest, int matchR, int matchC) {
+        boolean [][] visited = new boolean[forest.length][forest[0].length];
+        Queue<int[]> queue = new LinkedList<>();
+        int[] myNum = {matchR,matchC,0};
+
+        queue.add(myNum);
+
+        myNum[2]++;
+        while(!queue.isEmpty())
+        {
+            queue.poll();
+        }
         // HINT: when adding to your BFS queue, you can include more information than
         // just a location. What other information might be useful?
-        return -1;
+        return myNum[2];
     }
 
     public static List<int[]> possibleBurns(char[][] forest, int matchR, int matchC)
