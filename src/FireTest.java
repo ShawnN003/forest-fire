@@ -62,6 +62,24 @@ public class FireTest {
     }
 
     @Test
+    public void testTimeAllPeriod() {
+        char[][] forest = {
+            {'.','.','.','.','.'},
+            {'.','.','.','.','.'},
+            {'.','.','.','.','.'}
+        };
+
+        int matchR = 2;
+        int matchC = 4;
+
+        int expected = 0;
+        int actual = Fire.timeToBurn(forest, matchR, matchC);
+
+        assertEquals(expected, actual);
+    }
+
+
+    @Test
     public void testGetPossibleBurns() {
         char[][] forest = {
             {'t','.','.','t','t','t','t','.','t'},
@@ -82,6 +100,22 @@ public class FireTest {
         assertTrue(convertedSet.contains("2, 4"));
         assertTrue(convertedSet.contains("3, 3"));
         assertFalse(convertedSet.contains("3, 0"));
+    }
+
+    @Test 
+    public void testGetEmptyPossibleBurns()
+    {
+        char[][] forest = {
+            {'.','.','.','.','.','.','.','.','.'},
+            {'.','.','.','.','.','.','.','.','.'},
+            {'.','.','.','.','.','.','.','.','.'},
+            {'.','.','.','.','.','.','.','.','.'}
+        };
+        int matchR = 3;
+        int matchC = 3;
+
+        List<int[]> possibleBurn = Fire.possibleBurns(forest, matchR, matchC);
+        assertEquals(0,possibleBurn.size());
     }
 
     // Set method to convert list to set to check what it contains
